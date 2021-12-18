@@ -1,2 +1,3 @@
 # blockchain-messenger
-a messaging app based on Adamant blockchain nodes and accessed via Adamant-im FrontEnd
+This is a case study of how blockchain messaging app works by studying the example of Adamant Messenger that uses blockchain transaction to act as it's persistance layer for the messages and WebSockets as a work around in order to aliviate the slow nature of transaction to simulate real-time messagery. Adamant provides you with the capability of creating your own node, so your messaging app is always available making the websockets protocol works in the most optimal condition: Having both interlocutors communicate on the same node.
+Make sure to check Adamant works href(https://adamant.im/)
