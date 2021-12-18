@@ -1,0 +1,39 @@
+FROM ubuntu:latest
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV TERM linux
+
+RUN sed -i 's/^mesg n$/tty -s \&\& mesg n/g' /root/.profile
+#? initial machine setup
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+RUN apt-get update && apt-get install -y git bash locales
+RUN sudo apt-get install -y python build-essential curl automake autoconf libtool
+
+#? language/locale settings
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
+#? installing node js,npm and yarn
+RUN apt-get install -y nodejs
+RUN apt-get install -y npm
+RUN npm install --global yarn
+
+RUN useradd adamant -s /bin/bash -m
+RUN echo "adamant:password" | chpasswd
+RUN echo "%adamant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+USER adamant
+WORKDIR /home/adamant
+ADD https://api.github.com/repos/adamant-im/adamant-im/git/refs/heads/master version.json
+RUN git clone https://github.com/Adamant-im/adamant-im
+
+WORKDIR /home/adamant/adamant-im
+
+
+RUN yarn install
+RUN yarn run serve
+
+EXPOSE 8080
+COPY starter.sh /home/adamant/adamant
+CMD ["/bin/bash", "./starter.sh"]
