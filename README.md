@@ -19,37 +19,47 @@ The manual describes API endpoints to manage accounts, transactions, chats, and 
 - 50 GB disk space or larger depending on the current node height.
 
 ### Installation
-Using the docker-compose file in the root directory ( which uses a adamant-node v0.4 image on dockerHub) 
+Using the `docker-compose.yml` file in the root directory ( which uses a adamant-node v0.4 image on dockerHub) 
 
-`docker-compose pull`
+```
+docker-compose pull
+```
 
-Using the docker-compose file in the adamantNodeLatest directory we can get the latest version of adamant (beware of dependency deprecation)
+Using the `docker-compose.yml` file in the `adamantNodeLatest` directory we can get the latest version of adamant (beware of dependency deprecation)
 
-`cd adamantNodeLatest
- docker-compose pull
-`
+```
+cd adamantNodeLatest
+docker-compose pull
+```
 
-After pulling both postgres and adamant-node (or building it if we use the second option) we can run:
+After pulling both `postgres` and `adamant-node` (or building it if we use the second option) we can run:
 
-`docker-compose up`
+```
+docker-compose up
+```
 
 You can stop or start the container via the command 
 
-`docker-compose stop
- docker-compose start`
+```
+docker-compose stop
+docker-compose start
+```
  
 Then using your IP adress you can check if the node was correctly deployed on [Adamant Explorer](https://explorer.adamant.im/networkMonitor)
 or by executing this comand on your docker container
 
-`docker exec <CONTAINER_ID> curl -k -X GET http://localhost:36666/api/blocks/getHeight`
+```
+docker exec <CONTAINER_ID>
+curl -k -X GET http://localhost:36666/api/blocks/getHeight
+```
 
 Then in order to use our node we need to deploy our own version of [Adamant Messenger Front-end](https://github.com/Adamant-im/adamant-im)
 for that we need to follow the setup steps on local machine (see the git repo above) or we can build the DockerFile in the frontEnd directory
 
-`
+```
 cd frontEnd
 docker build -t adamant/frontend:latest .
 docker run -p 8080:8080 adamant/frontend:latest
-`
+```
 
 Here's a video illustration: https://mega.nz/file/ZlZHzAYb#sG0AV_3szKkWEfaFTC6l-Cq5kBLHcxFyVUBjrYif0wY
