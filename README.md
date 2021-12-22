@@ -52,4 +52,4 @@ docker build -t adamant/frontend:latest .
 docker run -p 8080:8080 adamant/frontend:latest
 `
 
-Here's a video illustration: 
+Here's a video illustration: https://mega.nz/file/ZlZHzAYb#sG0AV_3szKkWEfaFTC6l-Cq5kBLHcxFyVUBjrYif0wY
